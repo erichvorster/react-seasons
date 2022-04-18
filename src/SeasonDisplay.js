@@ -1,4 +1,6 @@
+import './SeasonDisplay.css';//Webpack automatically pulls this into index.html
 import React from "react";
+
 
 
 //This is referred to as a config object
@@ -13,6 +15,8 @@ const seasonConfig = {
     }
 }
 
+
+//Function to determine the season
 const getSeason = (lat,month) => {
     if(month > 2 && month < 9) {
         return lat > 0 ? 'summer' : 'winter';
@@ -24,18 +28,17 @@ const getSeason = (lat,month) => {
 
 const SeasonDisplay = (props) =>{
    let season = getSeason(props.lat, new Date().getMonth());
+   //Here we destructure our seasonConfig object using object bracket notation
    let {text, iconName} = seasonConfig[season]
 
-
-
     return (
-    <div>
-        <i className={`${iconName} icon`}></i>
+    <div className={`season-display ${season}`}>
+        <i className={`icon-left massive ${iconName} icon`}></i>
         <h1>{text}</h1>
-        <i className={`${iconName} icon`}></i>
+        <i className={`icon-right massive ${iconName} icon`}></i>
     </div>
-    
     )
 }
 
 export default SeasonDisplay;
+
